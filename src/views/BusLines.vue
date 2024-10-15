@@ -54,19 +54,23 @@
 
 <script setup lang="ts">
 import { useStore } from 'vuex'
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import sortIconSvg from '@/assets/icons/sort-icon.svg'
+import type { SortOrder } from '@/types/index'
 
 const store = useStore()
 const { isLoading, selectedStop, stopsByLine, timesByStop, toggleSort, getStops } = useBusStops()
 const { selectedLine, lines, selectLine } = useBusLines()
 
 onMounted(getStops)
+watch(selectedLine, () => {
+	selectedStop.value = ''
+})
 
 function useBusStops () {
 	const isLoading = ref<boolean>(false)
-	const selectedStop = ref<string>()
-	const sortOrder = ref<'asc' | 'desc'>('asc')
+	const selectedStop = ref<string>('')
+	const sortOrder = ref<SortOrder>('asc')
 
 	const stopsByLine = computed<string[]>(() => store.getters.lineStops(selectedLine.value, sortOrder.value))
 	const timesByStop = computed(() => store.getters.stopTimes(selectedStop.value))
