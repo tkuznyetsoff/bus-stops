@@ -14,6 +14,13 @@ html, body, #app {
 	height: 100%;
 }
 
+.btn-primary {
+	--bs-btn-hover-bg: #2E3E6E;
+	--bs-btn-hover-border-color: #2E3E6E;
+	--bs-btn-active-bg: #2E3E6E;
+	--bs-btn-active-border-color: #2E3E6E;
+}
+
 ::-webkit-scrollbar {
 	width: 8px;
 	height: 8px;

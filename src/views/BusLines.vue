@@ -14,13 +14,13 @@
 			<span v-else>No lines to show</span>
 		</div>
 		<div class="d-flex gap-4 overflow-hidden flex-grow-1">
-			<div class="bg-white rounded-1 overflow-auto flex-1">
+			<div class="d-flex flex-column bg-white rounded-1 flex-1">
 				<h3 class="font-title/semibold p-4 pb-2 mb-0">Bus Line: {{ selectedLine }}</h3>
 				<p class="font-label/semibold p-4 mb-0 border-bottom cursor-pointer" @click="toggleSort">
 					Bus Stops
 					<img :src="sortIconSvg" alt="sort icon"/>
 				</p>
-				<ul class="list-group list-group-flush">
+				<ul class="list-group list-group-flush overflow-auto flex-1">
 					<button
 						v-for="(lineStop, index) in stopsByLine"
 						:key="index"
@@ -34,10 +34,10 @@
 					</button>
 				</ul>
 			</div>
-			<div class="bg-white rounded-1 overflow-auto flex-1">
+			<div class="d-flex flex-column bg-white rounded-1 flex-1">
 				<h3 class="font-title/semibold p-4 pb-2 mb-0">Bus Stop: {{ selectedStop }}</h3>
 				<p class="font-label/semibold p-4 mb-0 border-bottom">Time</p>
-				<ul class="list-group list-group-flush">
+				<ul class="list-group list-group-flush overflow-auto flex-1">
 					<li
 						v-for="(stopTime, index) in timesByStop"
 						:key="index"
