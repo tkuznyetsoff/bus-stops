@@ -7,22 +7,23 @@ export default createStore({
 		stops: [] as Stop[]
 	},
 	getters: {
-		lines: (state) => [...new Set(state.stops.map((stop) => stop.line))].sort(),
+		lines: (state) => [...new Set(state.stops.map((stop) => stop.line))].sort((a, b) => a - b),
 
-		lineStops: (state) => (line: number, sortOrder: SortOrder) => state.stops.reduce((memo, stop) => {
-			// const result = `${stop.stop} ${stop.order.toString().padStart(2, '0')}`
-			if (stop.line === line && !memo.includes(stop.stop)) memo.push(stop.stop)
-			return memo
-		}, [] as string[])?.sort((a, b) => sortOrder === 'asc' ? a.localeCompare(b) : b.localeCompare(a)),
+		stopsByLine: (state) => (line: number, sortOrder?: SortOrder): Stop[] => {
+			return state.stops
+				.filter((stop) => stop.line === line)
+				.sort((a, b) => 
+					sortOrder === 'asc'
+						? a.stop.localeCompare(b.stop) || a.order - b.order
+						: b.stop.localeCompare(a.stop) || b.order - a.order
+				);
+		},
 
-		stopTimes: (state) => (stop: string) => state.stops.reduce((memo, stopObj) => {
-			if (stop === stopObj.stop && !memo.includes(stopObj.time)) memo.push(stopObj.time)
-			return memo
-		}, [] as string[])?.sort((a, b) => {
-			const [hoursA, minutesA] = a.split(':').map(Number)
-			const [hoursB, minutesB] = b.split(':').map(Number)
-			return hoursA - hoursB || minutesA - minutesB
-		})
+		timesByStop: (state, getters) => (line: number, selectedStop: Stop | null): Stop[] => {
+			return (getters.stopsByLine(line) as Stop[])
+				.filter(({ stop, order }) => stop === selectedStop?.stop && order === selectedStop.order)
+				.sort((a, b) => a.time.localeCompare(b.time))
+		}
 	},
 	mutations: {
 		setStops (state, stops) {

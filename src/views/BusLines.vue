@@ -30,20 +30,20 @@
 						]"
 						@click="selectedStop = lineStop"
 					>
-						{{ lineStop }}
+						{{ lineStop.stop }} {{ formatStopOrder(lineStop.order) }}
 					</button>
 				</ul>
 			</div>
 			<div class="d-flex flex-column bg-white rounded-1 flex-1">
-				<h3 class="font-title/semibold p-4 pb-2 mb-0">Bus Stop: {{ selectedStop }}</h3>
+				<h3 class="font-title/semibold p-4 pb-2 mb-0">Bus Stop: {{ selectedStop?.stop }} {{ formatStopOrder(selectedStop?.order) }}</h3>
 				<p class="font-label/semibold p-4 mb-0 border-bottom">Time</p>
 				<ul class="list-group list-group-flush overflow-auto flex-1">
 					<li
-						v-for="(stopTime, index) in timesByStop"
+						v-for="(stop, index) in timesByStop"
 						:key="index"
 						class="list-group-item list-group-item-action font-body/regular"
 					>
-						{{ stopTime }}
+						{{ stop.time }}
 					</li>
 				</ul>
 			</div>
@@ -56,25 +56,30 @@
 import { useStore } from 'vuex'
 import { ref, computed, onMounted, watch } from 'vue'
 import sortIconSvg from '@/assets/icons/sort-icon.svg'
-import type { SortOrder } from '@/types/index'
+import type { SortOrder, Stop } from '@/types/index'
 
 const store = useStore()
-const { isLoading, selectedStop, stopsByLine, timesByStop, toggleSort, getStops } = useBusStops()
+const { isLoading, selectedStop, stopsByLine, timesByStop, formatStopOrder, toggleSort, getStops } = useBusStops()
 const { selectedLine, lines, selectLine } = useBusLines()
 
 onMounted(getStops)
 watch(selectedLine, () => {
-	selectedStop.value = ''
+	selectedStop.value = null
 })
 
 function useBusStops () {
 	const isLoading = ref<boolean>(false)
-	const selectedStop = ref<string>('')
+	const selectedStop = ref<Stop | null>(null)
 	const sortOrder = ref<SortOrder>('asc')
 
-	const stopsByLine = computed<string[]>(() => store.getters.lineStops(selectedLine.value, sortOrder.value))
-	const timesByStop = computed(() => store.getters.stopTimes(selectedStop.value))
+	const stopsByLine = computed(() => Array.from(new Map(
+		(store.getters.stopsByLine(selectedLine.value, sortOrder.value) as Stop[])
+			.map(item => [`${item.stop}_${item.order}`, item])
+	).values()))
 
+	const timesByStop = computed<Stop[]>(() => store.getters.timesByStop(selectedLine.value, selectedStop.value))
+
+	const formatStopOrder = (stop?: Stop['order']) => stop?.toString()?.padStart(2, '0')
 	const toggleSort = () => sortOrder.value = sortOrder.value === 'asc' ? 'desc' : 'asc'
 	const getStops = async function () {
 		isLoading.value = true
@@ -93,6 +98,7 @@ function useBusStops () {
 		sortOrder,
 		stopsByLine,
 		timesByStop,
+		formatStopOrder,
 		toggleSort,
 		getStops
 	}
