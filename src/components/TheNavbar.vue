@@ -5,10 +5,6 @@
 	</nav>
 </template>
 
-<script setup lang="ts">
-
-</script>
-
 <style scoped>
 .nav-link {
 	padding: 20px 24px;

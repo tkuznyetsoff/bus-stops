@@ -22,7 +22,17 @@ export default createStore({
 		timesByStop: (state, getters) => (line: number, selectedStop: Stop | null): Stop[] => {
 			return (getters.stopsByLine(line) as Stop[])
 				.filter(({ stop, order }) => stop === selectedStop?.stop && order === selectedStop.order)
-				.sort((a, b) => a.time.localeCompare(b.time))
+				.sort((a, b) => {
+					const timeToMinutes = (time: string) => {
+						const [hours, minutes] = time.split(':').map(Number);
+						return hours * 60 + minutes;
+					};
+					return timeToMinutes(a.time) - timeToMinutes(b.time);
+				})
+		},
+
+		filteredStops: (state) => (query: string): Stop[] => {
+			return !query ? state.stops : state.stops.filter((stop) => stop.stop.includes(query))
 		}
 	},
 	mutations: {
