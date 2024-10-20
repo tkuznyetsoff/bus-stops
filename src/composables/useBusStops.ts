@@ -5,12 +5,12 @@ import { useBusLines } from '@/composables/useBusLines'
 
 const { selectedLine } = useBusLines()
 
-const isLoading = ref<boolean>(false)
 const selectedStop = ref<Stop | null>(null)
-const sortOrder = ref<SortOrder>('asc')
 
 export function useBusStops () {
 	const store = useStore()
+	const isLoading = ref<boolean>(false)
+	const sortOrder = ref<SortOrder>('asc')
 	const stopsByLine = computed(() => Array.from(new Map(
 		(store.getters.stopsByLine(selectedLine.value, sortOrder.value) as Stop[])
 			.map(item => [`${item.stop}_${item.order}`, item])

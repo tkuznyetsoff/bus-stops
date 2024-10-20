@@ -8,4 +8,10 @@
 
 <script lang="ts" setup>
 import TheNavbar from '@/components/TheNavbar.vue';
+import { useBusStops } from '@/composables/useBusStops';
+import { onMounted } from 'vue'
+
+const { getStops } = useBusStops()
+
+onMounted(getStops)
 </script>

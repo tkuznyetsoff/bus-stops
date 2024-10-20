@@ -8,14 +8,20 @@
 	--bs-link-color: black;
 	--bs-link-hover-color: black;
 	--bs-primary-rgb: 25, 82, 225;
-	--bs-secondary-rgb: 99, 102, 110
+	--bs-secondary-rgb: 99, 102, 110;
 }
 
 html, body, #app {
 	height: 100%;
 }
 
+.list-group {
+	--bs-list-group-border-color: #F3F4F9;
+}
+
 .btn-primary {
+	--bs-btn-bg: #1952E1;
+	--bs-btn-border-color: #1952E1;
 	--bs-btn-hover-bg: #2E3E6E;
 	--bs-btn-hover-border-color: #2E3E6E;
 	--bs-btn-active-bg: #2E3E6E;
@@ -39,4 +45,8 @@ html, body, #app {
 ::-webkit-scrollbar-track {
 	background-color: rgba(0, 0, 0, 0.1);
 	border-radius: 10px;
+}
+
+.list-group-item.list-group-item-action {
+	padding: 20px 24px;
 }

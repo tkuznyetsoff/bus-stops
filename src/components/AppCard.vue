@@ -18,14 +18,11 @@ defineProps<{
 }>()
 </script>
 
-<style lang="scss">
-.app-card {
-	border: dashed 3px transparent;
-
-	&--bordered {
-		border-image-slice: 1;
-		border-image-repeat: round;
-		border-image-source: url('@/assets/border-rounded.png');
-	}
+<style>
+.app-card--bordered {
+	border: dashed 2px;
+	border-image-slice: 1;
+	border-image-repeat: round;
+	border-image-source: url('@/assets/border.png');
 }
 </style>

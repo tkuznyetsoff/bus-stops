@@ -31,8 +31,15 @@ export default createStore({
 				})
 		},
 
-		filteredStops: (state) => (query: string): Stop[] => {
-			return !query ? state.stops : state.stops.filter((stop) => stop.stop.includes(query))
+		filteredStops: (state) => (query?: string, sortOrder?: SortOrder): Stop[] => {
+			const uniqueStops = Array.from(new Map(
+				state.stops.map(item => [`${item.stop}_${item.order}`, item])
+			).values()).sort((a, b) => 
+				sortOrder === 'asc'
+					? a.stop.localeCompare(b.stop) || a.order - b.order
+					: b.stop.localeCompare(a.stop) || b.order - a.order
+			);
+			return !query ? uniqueStops : uniqueStops.filter(({ stop }) => stop.toLocaleLowerCase().includes(query.toLocaleLowerCase()))
 		}
 	},
 	mutations: {

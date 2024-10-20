@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import sortIconSvg from '@/assets/icons/sort-icon.svg'
+import sortIconSvg from '@/assets/icons/sort.svg'
 import { useBusLines } from '@/composables/useBusLines';
 import { useBusStops } from '@/composables/useBusStops';
 

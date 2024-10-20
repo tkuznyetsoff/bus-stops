@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, watch } from 'vue'
+import { computed, onUnmounted, watch } from 'vue'
 import { useBusStops } from '@/composables/useBusStops'
 import { useBusLines } from '@/composables/useBusLines'
 
@@ -33,13 +33,12 @@ import AppCard from '@/components/AppCard.vue'
 import BusStopsList from '@/components/bus-lines/BusStopsList.vue'
 import StopTimesList from '@/components/bus-lines/StopTimesList.vue'
 
-const { isLoading, selectedStop, getStops } = useBusStops()
+const { isLoading, selectedStop } = useBusStops()
 const { selectedLine, lines } = useBusLines()
 
 const busStopsPlaceholder = computed(() => !selectedLine.value ? 'Please select the bus line first' : '')
 const stopTimesPlaceholder = computed(() => !selectedLine.value ? 'Please select the bus line first' : !selectedStop.value ? 'Please select the bus stop first' : '')
 
-onMounted(getStops)
 onUnmounted(() => {
 	selectedLine.value = undefined
 	selectedStop.value = null
@@ -53,9 +52,5 @@ watch(selectedLine, () => {
 .lines-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(54px, 1fr));
-}
-
-.list-group-item.list-group-item-action {
-	padding: 20px 24px;
 }
 </style>
