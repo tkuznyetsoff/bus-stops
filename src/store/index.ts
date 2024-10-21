@@ -54,5 +54,6 @@ export default createStore({
 		}
 	},
 	modules: {
+		// this store might be splitted out into smaller modules, but for this project puproses it makes no sense
 	}
 })

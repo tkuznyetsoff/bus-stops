@@ -5,10 +5,13 @@
 	</nav>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+.nav {
+	--bs-nav-link-color: #9A9DA4;
+}
+
 .nav-link {
 	padding: 20px 24px;
-	color: #9A9DA4;
 
 	&.router-link-active {
 		color: black;

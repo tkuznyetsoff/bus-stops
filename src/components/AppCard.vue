@@ -3,7 +3,7 @@
 		{ 'app-card--bordered': placeholder },
 		'app-card d-flex flex-column bg-white rounded-1'
 	]">
-		<div v-if="placeholder" class="d-flex align-items-center justify-content-center w-full h-full">
+		<div v-if="placeholder" class="d-flex align-items-center justify-content-center h-100">
 			<p class="text-secondary">{{ placeholder }}</p>
 		</div>
 		<slot v-else></slot>

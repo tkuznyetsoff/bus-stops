@@ -1,5 +1,5 @@
 <template>
-    <div class="container py-5 mx-auto d-flex flex-column h-full">
+    <div class="container py-5 mx-auto d-flex flex-column h-100">
         <h1 class="font-header/semibold mb-4">Timetable</h1>
         <TheNavbar class="mb-3"/>
         <RouterView/>
