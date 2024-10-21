@@ -1,9 +1,9 @@
 <template>
 	<h3 class="font-title/semibold p-4 pb-2 mb-0">Bus Line: {{ selectedLine }}</h3>
-	<p class="font-label/semibold p-4 mb-0 border-bottom cursor-pointer" @click="toggleSort">
+	<button class="btn border-0 rounded-0 font-label/semibold p-4 mb-0 border-bottom text-start" @click="toggleSort">
 		Bus Stops
 		<SortIcon/>
-	</p>
+	</button>
 	<ul class="list-group list-group-flush overflow-auto flex-1">
 		<button
 			v-for="(lineStop, index) in stopsByLine"

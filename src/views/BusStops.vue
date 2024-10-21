@@ -9,11 +9,11 @@
 				>
 				<SearchIcon class="input__icon"/>
 			</div>
-			<p class="font-label/semibold p-4 mb-0 border-bottom cursor-pointer" @click="toggleSort">
+			<button class="btn border-0 rounded-0 font-label/semibold p-4 mb-0 border-bottom text-start" @click="toggleSort">
 				Bus Stops
 				<SortIcon/>
-			</p>
-			<div v-if="isLoading" class="spinner-border text-primary m-4"></div>
+			</button>
+			<div v-if="isLoading" cass="spinner-border text-primary m-4"></div>
 			<ul
 				v-else-if="stops.length"
 				class="list-group list-group-flush overflow-auto flex-1"

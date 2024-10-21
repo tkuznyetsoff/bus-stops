@@ -8,6 +8,9 @@ const routes: Array<RouteRecordRaw> = [{
 	name: 'bus-stops',
 	path: '/bus-stops',
 	component: () => import('@/views/BusStops.vue'),
+}, {
+	path: '/:pathMatch(.*)*',
+	redirect: '/'
 }]
 
 const router = createRouter({

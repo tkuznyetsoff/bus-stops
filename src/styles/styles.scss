@@ -1,5 +1,4 @@
 @import url('_typography.scss');
-@import url('_classes.scss');
 
 :root {
 	--bs-body-bg: #F3F4F9;
@@ -26,6 +25,10 @@ html, body, #app {
 	--bs-btn-hover-border-color: #2E3E6E;
 	--bs-btn-active-bg: #2E3E6E;
 	--bs-btn-active-border-color: #2E3E6E;
+}
+
+.flex-1 {
+	flex: 1 1 0%;
 }
 
 ::-webkit-scrollbar {
