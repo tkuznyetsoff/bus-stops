@@ -11,7 +11,7 @@
 			</div>
 			<p class="font-label/semibold p-4 mb-0 border-bottom cursor-pointer" @click="toggleSort">
 				Bus Stops
-				<img :src="sortIconSvg" alt="sort icon"/>
+				<SortIcon/>
 			</p>
 			<div v-if="isLoading" class="spinner-border text-primary m-4"></div>
 			<ul
@@ -34,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import sortIconSvg from '@/assets/icons/sort.svg'
+import SortIcon from '@/components/icons/SortIcon.vue';
 import AppCard from '@/components/AppCard.vue';
 import SearchIcon from '@/components/icons/SearchIcon.vue';
 import { useBusStops } from '@/composables/useBusStops';
