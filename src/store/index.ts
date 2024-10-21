@@ -31,7 +31,7 @@ export default createStore({
 				})
 		},
 
-		filteredStops: (state) => (query?: string, sortOrder?: SortOrder): Stop[] => {
+		filteredStops: (state) => (query?: string, sortOrder: SortOrder = 'asc'): Stop[] => {
 			const uniqueStops = Array.from(new Map(
 				state.stops.map(item => [`${item.stop}_${item.order}`, item])
 			).values()).sort((a, b) => 

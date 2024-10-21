@@ -5,6 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "test": "vitest",
     "lint": "vue-cli-service lint",
     "api": "npx json-server --watch data.json"
   },
